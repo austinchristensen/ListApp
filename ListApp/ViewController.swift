@@ -46,10 +46,10 @@ class ViewController: UIViewController {
         tableView.reloadData()
     }
     
-    func removeItem() {
-        UserDefaults.setValue(count -= 1, forKey: count)
-        
-    }
+//    func removeItem() {
+//        UserDefaults.setValue(count -= 1, forKey: count)
+//        
+//    }
     
     @IBAction func didTapAdd() {
         let vc = storyboard?.instantiateViewController(identifier: "entry") as! NewEntryViewController
@@ -74,7 +74,6 @@ extension ViewController: UITableViewDelegate {
 extension ViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print("Items.count: \(items.count)")
         return items.count
     }
     
@@ -88,7 +87,6 @@ extension ViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            print(items[indexPath.row])
             items.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
         }

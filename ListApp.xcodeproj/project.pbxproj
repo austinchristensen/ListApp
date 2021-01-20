@@ -15,6 +15,8 @@
 		43B5129A25B0C9A600435FE6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 43B5129825B0C9A600435FE6 /* LaunchScreen.storyboard */; };
 		43B512A725B7A4C900435FE6 /* NewEntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43B512A625B7A4C900435FE6 /* NewEntryViewController.swift */; };
 		43B512AA25B7A4D900435FE6 /* ItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43B512A925B7A4D900435FE6 /* ItemViewController.swift */; };
+		43B512AD25B8CB5200435FE6 /* ListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43B512AC25B8CB5200435FE6 /* ListItem.swift */; };
+		43B512B125B8CC2E00435FE6 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43B512B025B8CC2E00435FE6 /* DataManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +30,8 @@
 		43B5129B25B0C9A600435FE6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		43B512A625B7A4C900435FE6 /* NewEntryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewEntryViewController.swift; sourceTree = "<group>"; };
 		43B512A925B7A4D900435FE6 /* ItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemViewController.swift; sourceTree = "<group>"; };
+		43B512AC25B8CB5200435FE6 /* ListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListItem.swift; sourceTree = "<group>"; };
+		43B512B025B8CC2E00435FE6 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +73,8 @@
 				43B5129B25B0C9A600435FE6 /* Info.plist */,
 				43B512A625B7A4C900435FE6 /* NewEntryViewController.swift */,
 				43B512A925B7A4D900435FE6 /* ItemViewController.swift */,
+				43B512AC25B8CB5200435FE6 /* ListItem.swift */,
+				43B512B025B8CC2E00435FE6 /* DataManager.swift */,
 			);
 			path = ListApp;
 			sourceTree = "<group>";
@@ -146,8 +152,10 @@
 				43B5129225B0C9A400435FE6 /* ViewController.swift in Sources */,
 				43B5128E25B0C9A400435FE6 /* AppDelegate.swift in Sources */,
 				43B512AA25B7A4D900435FE6 /* ItemViewController.swift in Sources */,
+				43B512B125B8CC2E00435FE6 /* DataManager.swift in Sources */,
 				43B512A725B7A4C900435FE6 /* NewEntryViewController.swift in Sources */,
 				43B5129025B0C9A400435FE6 /* SceneDelegate.swift in Sources */,
+				43B512AD25B8CB5200435FE6 /* ListItem.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
