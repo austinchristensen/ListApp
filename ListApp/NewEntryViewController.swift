@@ -11,7 +11,7 @@ class NewEntryViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet var field: UITextField!
     
-    var update: (() -> Void)?
+    var update: ((_ newItem: ListItem) -> Void)?
     
 
     override func viewDidLoad() {
@@ -28,15 +28,13 @@ class NewEntryViewController: UIViewController, UITextFieldDelegate {
     }
     
     @objc func saveItem() {
-        guard let text = field.text, !text.isEmpty, var count = UserDefaults().value(forKey: "count") as? Int else {
+        guard let text = field.text, !text.isEmpty else {
             return
         }
         
-        count += 1
-        UserDefaults().set(count, forKey: "count")
-        UserDefaults().set(text, forKey: "item_\(count)")
+        let newItem = ListItem(title: text, createdAt: Date(), itemIdentifier: UUID())
         
-        update?()
+        update?(newItem)
         
         navigationController?.popToRootViewController(animated: true)
         

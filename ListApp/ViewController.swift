@@ -11,7 +11,7 @@ class ViewController: UIViewController {
     
     @IBOutlet var tableView: UITableView!
     
-    var items = [String]()
+    var items: [ListItem] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,45 +20,32 @@ class ViewController: UIViewController {
         
         tableView.delegate = self
         tableView.dataSource = self
-        
-        if !UserDefaults().bool(forKey: "setup") {
-            UserDefaults().set(true, forKey: "setup")
-            UserDefaults().set(0, forKey: "count")
-        }
-        
-        updateItems()
+
+        loadData()
     }
     
-    func updateItems() {
-        
-        items.removeAll()
-        
-        guard let count = UserDefaults().value(forKey: "count") as? Int else {
-            return
-        }
-        
-        for i in 0..<count {
-            if let item = UserDefaults().value(forKey: "item_\(i+1)") as? String {
-                items.append(item)
-            }
-        }
-        
+    func loadData() {
+        items = DataManager.loadAll(ListItem.self).sorted(by: {
+            $0.createdAt < $1.createdAt
+        })
         tableView.reloadData()
     }
     
-//    func removeItem() {
-//        UserDefaults.setValue(count -= 1, forKey: count)
-//        
-//    }
+    func updateItems(newItem: ListItem) {
+        newItem.saveItem()
+        items.append(newItem)
+        loadData()
+    }
     
     @IBAction func didTapAdd() {
         let vc = storyboard?.instantiateViewController(identifier: "entry") as! NewEntryViewController
         vc.title = "New Item"
-        vc.update = {
+        vc.update = { [weak self] item in
             DispatchQueue.main.async {
-                self.updateItems()
+                self?.updateItems(newItem: item)
             }
         }
+        
         navigationController?.pushViewController(vc, animated: true)
     }
 
@@ -80,15 +67,18 @@ extension ViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         
-        cell.textLabel?.text = items[indexPath.row]
+        let item = items[indexPath.row]
+        
+        cell.textLabel?.text = item.title
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
+            items[indexPath.row].deleteItem()
             items.remove(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .fade)
+            tableView.deleteRows(at: [indexPath], with: .automatic)
         }
     }
 }
