@@ -10,6 +10,7 @@ import UIKit
 class ItemDetailViewController: UIViewController {
     
     @IBOutlet var tableView: UITableView!
+    @IBOutlet weak var addItemButton: UIBarButtonItem!
     
     var detailItem: ListItem?
     var detailItems: [String] = []
@@ -25,6 +26,31 @@ class ItemDetailViewController: UIViewController {
         detailItems = itemsFromDetailItem
         tableView.reloadData()
     }
+    
+    @IBAction func addButtonItemClicked(_ sender: Any) {
+        promptForAnswer()
+    }
+    
+    func promptForAnswer() {
+        let ac = UIAlertController(title: "Enter answer", message: nil, preferredStyle: .alert)
+        ac.addTextField()
+
+        let submitAction = UIAlertAction(title: "Submit", style: .default) { [unowned ac] _ in
+            let answer = ac.textFields![0].text
+            guard let newItem = answer else { return }
+            self.detailItems.append(newItem)
+            self.detailItem?.detailItems = self.detailItems
+            self.detailItem?.saveItem()
+            self.tableView.reloadData()
+            self.reloadListClosure?()
+        }
+
+        ac.addAction(submitAction)
+
+        present(ac, animated: true)
+    }
+    
+    
 }
 
 extension ItemDetailViewController: UITableViewDelegate {

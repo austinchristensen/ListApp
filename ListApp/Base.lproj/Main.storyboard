@@ -187,8 +187,15 @@
                             <constraint firstItem="Cis-1g-4gp" firstAttribute="top" secondItem="Hcd-zL-z8G" secondAttribute="top" id="RBt-SP-v0f"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="x5T-6l-KJW"/>
+                    <navigationItem key="navigationItem" id="x5T-6l-KJW">
+                        <barButtonItem key="rightBarButtonItem" title="Add Item" id="Cds-8G-eQj">
+                            <connections>
+                                <action selector="addButtonItemClicked:" destination="wTJ-cT-Qrt" id="Nc2-iu-djN"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
+                        <outlet property="addItemButton" destination="Cds-8G-eQj" id="Lac-OZ-5cb"/>
                         <outlet property="tableView" destination="Cis-1g-4gp" id="hVa-Gq-XLq"/>
                     </connections>
                 </viewController>
