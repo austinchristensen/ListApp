@@ -12,6 +12,8 @@ class ViewController: UIViewController {
     @IBOutlet var tableView: UITableView!
     
     var items: [ListItem] = []
+    var selectedItem: ListItem?
+    var itemDetailVC: ItemDetailViewController?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,13 +50,33 @@ class ViewController: UIViewController {
         
         navigationController?.pushViewController(vc, animated: true)
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let destinationViewController = segue.destination as? ItemDetailViewController {
+            self.itemDetailVC = destinationViewController
 
+            itemDetailVC?.reloadListClosure = { [weak self] in
+                self?.loadData()
+            }
+        }
+        
+        if segue.identifier == "detailSegue" {
+            if let destinationViewController = segue.destination as? ItemDetailViewController {
+                destinationViewController.detailItem = selectedItem
+            }
+        }
+    }
 
 }
 
 extension ViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cell = tableView.cellForRow(at: indexPath)
         tableView.deselectRow(at: indexPath, animated: true)
+        let item = items[indexPath.row]
+        selectedItem = item
+
+        performSegue(withIdentifier: "detailSegue", sender: cell)
     }
 }
 
