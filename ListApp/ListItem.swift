@@ -11,6 +11,7 @@ struct ListItem : Codable {
     var title: String
     var createdAt: Date
     var itemIdentifier: UUID
+    var detailItems: [String]?
     
     func saveItem() {
         DataManager.save(self, with: itemIdentifier.uuidString)
