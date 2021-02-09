@@ -10,6 +10,7 @@ import UIKit
 class ViewController: UIViewController {
     
     @IBOutlet var tableView: UITableView!
+    @IBOutlet weak var editAndSaveButton: UIBarButtonItem!
     
     var items: [ListItem] = []
     var selectedItem: ListItem?
@@ -28,14 +29,21 @@ class ViewController: UIViewController {
     
     func loadData() {
         items = DataManager.loadAll(ListItem.self).sorted(by: {
-            $0.createdAt < $1.createdAt
+            $0.index < $1.index
         })
         tableView.reloadData()
     }
     
-    func updateItems(newItem: ListItem) {
-        newItem.saveItem()
-        items.append(newItem)
+    func updateItems(newItem: ListItem?) {
+        if let updatedItem = newItem {
+            items.append(updatedItem)
+        }
+        for item in items {
+            var updatedItem = item
+            guard let updatedIndex = items.firstIndex(where: {$0.itemIdentifier == item.itemIdentifier} ) else { return }
+            updatedItem.index = updatedIndex
+            updatedItem.saveItem()
+        }
         loadData()
     }
     
@@ -49,6 +57,16 @@ class ViewController: UIViewController {
         }
         
         navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    @IBAction func didTapEdit() {
+        if tableView.isEditing {
+            tableView.isEditing = false
+            editAndSaveButton.title = "Edit"
+        } else {
+            tableView.isEditing = true
+            editAndSaveButton.title = "Save"
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -102,5 +120,16 @@ extension ViewController: UITableViewDataSource {
             items.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .automatic)
         }
+    }
+    
+    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        let movedObject = self.items[sourceIndexPath.row]
+        items.remove(at: sourceIndexPath.row)
+        items.insert(movedObject, at: destinationIndexPath.row)
+        updateItems(newItem: nil)
+    }
+    
+    func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+        return true
     }
 }

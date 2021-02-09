@@ -50,7 +50,6 @@ class ItemDetailViewController: UIViewController {
         present(ac, animated: true)
     }
     
-    
 }
 
 extension ItemDetailViewController: UITableViewDelegate {

@@ -57,7 +57,7 @@ class NewEntryViewController: UIViewController, UITextFieldDelegate {
             return
         }
         
-        let newItem = ListItem(title: text, createdAt: Date(), itemIdentifier: UUID(), detailItems: detailItems)
+        let newItem = ListItem(title: text, createdAt: Date(), itemIdentifier: UUID(), index: 0, detailItems: detailItems)
         
         update?(newItem)
         
