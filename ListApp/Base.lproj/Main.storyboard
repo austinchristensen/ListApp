@@ -194,14 +194,22 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="x5T-6l-KJW">
-                        <barButtonItem key="rightBarButtonItem" title="Add Item" id="Cds-8G-eQj">
-                            <connections>
-                                <action selector="addButtonItemClicked:" destination="wTJ-cT-Qrt" id="Nc2-iu-djN"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem title="Add Item" id="Cds-8G-eQj">
+                                <connections>
+                                    <action selector="addButtonItemClicked:" destination="wTJ-cT-Qrt" id="Nc2-iu-djN"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="Edit" id="x2K-6y-9dd">
+                                <connections>
+                                    <action selector="didTapEditAndSaveButton:" destination="wTJ-cT-Qrt" id="Zye-7C-oVd"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <connections>
                         <outlet property="addItemButton" destination="Cds-8G-eQj" id="Lac-OZ-5cb"/>
+                        <outlet property="editAndSaveButton" destination="x2K-6y-9dd" id="7U5-Vy-pZe"/>
                         <outlet property="tableView" destination="Cis-1g-4gp" id="hVa-Gq-XLq"/>
                     </connections>
                 </viewController>

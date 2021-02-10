@@ -11,6 +11,7 @@ class ItemDetailViewController: UIViewController {
     
     @IBOutlet var tableView: UITableView!
     @IBOutlet weak var addItemButton: UIBarButtonItem!
+    @IBOutlet weak var editAndSaveButton: UIBarButtonItem!
     
     var detailItem: ListItem?
     var detailItems: [String] = []
@@ -29,6 +30,16 @@ class ItemDetailViewController: UIViewController {
     
     @IBAction func addButtonItemClicked(_ sender: Any) {
         promptForAnswer()
+    }
+    
+    @IBAction func didTapEditAndSaveButton(_ sender: Any) {
+        if tableView.isEditing {
+            tableView.isEditing = false
+            editAndSaveButton.title = "Edit"
+        } else {
+            tableView.isEditing = true
+            editAndSaveButton.title = "Save"
+        }
     }
     
     func promptForAnswer() {
@@ -82,5 +93,18 @@ extension ItemDetailViewController: UITableViewDataSource {
             detailItem?.saveItem()
             reloadListClosure?()
         }
+    }
+    
+    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        let movedObject = self.detailItems[sourceIndexPath.row]
+        detailItems.remove(at: sourceIndexPath.row)
+        detailItems.insert(movedObject, at: destinationIndexPath.row)
+        detailItem?.detailItems = detailItems
+        detailItem?.saveItem()
+        reloadListClosure?()
+    }
+    
+    func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+        return true
     }
 }
