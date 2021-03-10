@@ -43,7 +43,9 @@ class NewEntryViewController: UIViewController, UITextFieldDelegate {
 
         let submitAction = UIAlertAction(title: "Submit", style: .default) { [unowned ac] _ in
             let answer = ac.textFields![0].text
-            self.detailItems.append(answer ?? "You didn't put anything?")
+            if answer != "" {
+                self.detailItems.append(answer ?? "You didn't put anything?")
+            }
             self.tableView.reloadData()
         }
 
@@ -57,7 +59,7 @@ class NewEntryViewController: UIViewController, UITextFieldDelegate {
             return
         }
         
-        let newItem = ListItem(title: text, createdAt: Date(), itemIdentifier: UUID(), index: 0, detailItems: detailItems)
+        let newItem = ListItem(title: text, itemIdentifier: UUID(), index: 0, detailItems: detailItems)
         
         update?(newItem)
         

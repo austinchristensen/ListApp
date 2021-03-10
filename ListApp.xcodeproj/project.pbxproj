@@ -64,19 +64,27 @@
 		43B5128C25B0C9A400435FE6 /* ListApp */ = {
 			isa = PBXGroup;
 			children = (
+				43C0B85A25F9394F00CB434C /* Data Manager */,
 				43B5128D25B0C9A400435FE6 /* AppDelegate.swift */,
 				43B5128F25B0C9A400435FE6 /* SceneDelegate.swift */,
-				43B5129125B0C9A400435FE6 /* ViewController.swift */,
 				43B5129325B0C9A400435FE6 /* Main.storyboard */,
 				43B5129625B0C9A600435FE6 /* Assets.xcassets */,
 				43B5129825B0C9A600435FE6 /* LaunchScreen.storyboard */,
 				43B5129B25B0C9A600435FE6 /* Info.plist */,
+				43B5129125B0C9A400435FE6 /* ViewController.swift */,
 				43B512A625B7A4C900435FE6 /* NewEntryViewController.swift */,
-				43B512AC25B8CB5200435FE6 /* ListItem.swift */,
-				43B512B025B8CC2E00435FE6 /* DataManager.swift */,
 				4380CC3225CDCFC400D4C019 /* ItemDetailViewController.swift */,
 			);
 			path = ListApp;
+			sourceTree = "<group>";
+		};
+		43C0B85A25F9394F00CB434C /* Data Manager */ = {
+			isa = PBXGroup;
+			children = (
+				43B512AC25B8CB5200435FE6 /* ListItem.swift */,
+				43B512B025B8CC2E00435FE6 /* DataManager.swift */,
+			);
+			path = "Data Manager";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

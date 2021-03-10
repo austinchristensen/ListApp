@@ -28,9 +28,9 @@ class ViewController: UIViewController {
     }
     
     func loadData() {
-        items = DataManager.loadAll(ListItem.self).sorted(by: {
+        items = DataManager.loadAll(type: ListItem.self)?.sorted(by: {
             $0.index < $1.index
-        })
+        }) ?? []
         tableView.reloadData()
     }
     
@@ -105,11 +105,13 @@ extension ViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        let cell = UITableViewCell(style: UITableViewCell.CellStyle.value1, reuseIdentifier: "cell")
         
         let item = items[indexPath.row]
         
         cell.textLabel?.text = item.title
+        cell.detailTextLabel?.text = item.isCompleted ? "Completed" : "Not Complete"
+        cell.detailTextLabel?.textColor = item.isCompleted ? .green : .red
         
         return cell
     }

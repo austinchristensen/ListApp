@@ -11,10 +11,12 @@ class ItemDetailViewController: UIViewController {
     
     @IBOutlet var tableView: UITableView!
     @IBOutlet weak var addItemButton: UIBarButtonItem!
+    @IBOutlet weak var toggleCompletedButton: UIButton!
     @IBOutlet weak var editAndSaveButton: UIBarButtonItem!
     
     var detailItem: ListItem?
     var detailItems: [String] = []
+    var initialIsCompletedValue = false
     var reloadListClosure: (() -> Void)?
 
     override func viewDidLoad() {
@@ -23,8 +25,10 @@ class ItemDetailViewController: UIViewController {
         self.tableView.delegate = self
         self.tableView.dataSource = self
 
-        guard let itemsFromDetailItem = detailItem?.detailItems else { return }
+        guard let itemsFromDetailItem = detailItem?.detailItems, let isCompleted = detailItem?.isCompleted else { return }
         detailItems = itemsFromDetailItem
+        initialIsCompletedValue = isCompleted
+        toggleCompletedButton.setTitle(initialIsCompletedValue ? "Change to No" : "Change to Yes", for: .normal)
         tableView.reloadData()
     }
     
@@ -42,23 +46,36 @@ class ItemDetailViewController: UIViewController {
         }
     }
     
+    @IBAction func didTapToggleCompletedButton(_ sender: Any) {
+        initialIsCompletedValue = !initialIsCompletedValue
+        toggleCompletedButton.setTitle(initialIsCompletedValue ? "No" : "Yes", for: .normal)
+        self.detailItem?.isCompleted = initialIsCompletedValue
+        self.save()
+    }
+    
     func promptForAnswer() {
         let ac = UIAlertController(title: "Enter answer", message: nil, preferredStyle: .alert)
         ac.addTextField()
 
         let submitAction = UIAlertAction(title: "Submit", style: .default) { [unowned ac] _ in
             let answer = ac.textFields![0].text
-            guard let newItem = answer else { return }
-            self.detailItems.append(newItem)
-            self.detailItem?.detailItems = self.detailItems
-            self.detailItem?.saveItem()
-            self.tableView.reloadData()
-            self.reloadListClosure?()
+            if answer != "" {
+                guard let newItem = answer else { return }
+                self.detailItems.append(newItem)
+                self.detailItem?.detailItems = self.detailItems
+                self.save()
+            }
         }
 
         ac.addAction(submitAction)
 
         present(ac, animated: true)
+    }
+    
+    private func save() {
+        self.detailItem?.saveItem()
+        self.tableView.reloadData()
+        self.reloadListClosure?()
     }
     
 }

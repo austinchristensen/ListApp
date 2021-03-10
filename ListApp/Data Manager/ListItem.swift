@@ -9,16 +9,16 @@ import Foundation
 
 struct ListItem : Codable {
     var title: String
-    var createdAt: Date
+    var isCompleted: Bool = false
     var itemIdentifier: UUID
     var index: Int
     var detailItems: [String]?
     
     func saveItem() {
-        DataManager.save(self, with: itemIdentifier.uuidString)
+        DataManager.save(object: self, name: itemIdentifier.uuidString)
     }
     
     func deleteItem() {
-        DataManager.delete(itemIdentifier.uuidString)
+        DataManager.delete(name: itemIdentifier.uuidString)
     }
 }

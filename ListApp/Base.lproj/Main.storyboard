@@ -170,7 +170,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Cis-1g-4gp">
-                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                                <rect key="frame" x="0.0" y="139" width="414" height="723"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="TuZ-SF-PRn">
@@ -183,14 +183,44 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Completed?     " textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RvL-Vh-odb">
+                                <rect key="frame" x="0.0" y="88" width="169" height="51"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="51" id="HeH-VZ-DSS"/>
+                                    <constraint firstAttribute="width" constant="169" id="uJL-go-3OA"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jFQ-ZJ-BwD">
+                                <rect key="frame" x="193" y="88" width="221" height="51"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="51" id="5BB-ze-hVx"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="51" id="sOH-ul-3Si"/>
+                                </constraints>
+                                <state key="normal" title="No"/>
+                                <connections>
+                                    <action selector="didTapToggleCompleted:" destination="WaU-Ga-gs4" eventType="touchUpInside" id="2Aj-HJ-teo"/>
+                                    <action selector="didTapToggleCompletedButton:" destination="wTJ-cT-Qrt" eventType="touchUpInside" id="hVX-DF-ajL"/>
+                                    <action selector="toggleCompletedButton:" destination="WaU-Ga-gs4" eventType="touchUpInside" id="Q61-7i-T0j"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Hcd-zL-z8G"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="Cis-1g-4gp" firstAttribute="leading" secondItem="Hcd-zL-z8G" secondAttribute="leading" id="Drq-8g-nDP"/>
-                            <constraint firstItem="Hcd-zL-z8G" firstAttribute="bottom" secondItem="Cis-1g-4gp" secondAttribute="bottom" id="Fd6-AG-FB4"/>
-                            <constraint firstItem="Hcd-zL-z8G" firstAttribute="trailing" secondItem="Cis-1g-4gp" secondAttribute="trailing" id="PeL-TW-E7o"/>
-                            <constraint firstItem="Cis-1g-4gp" firstAttribute="top" secondItem="Hcd-zL-z8G" secondAttribute="top" id="RBt-SP-v0f"/>
+                            <constraint firstItem="jFQ-ZJ-BwD" firstAttribute="top" secondItem="Hcd-zL-z8G" secondAttribute="top" id="1GM-yu-uhZ"/>
+                            <constraint firstItem="jFQ-ZJ-BwD" firstAttribute="top" secondItem="Hcd-zL-z8G" secondAttribute="top" id="6QW-Di-8Du"/>
+                            <constraint firstItem="Cis-1g-4gp" firstAttribute="bottom" secondItem="Hcd-zL-z8G" secondAttribute="bottom" id="GHy-PE-KSD"/>
+                            <constraint firstItem="Cis-1g-4gp" firstAttribute="trailing" secondItem="Hcd-zL-z8G" secondAttribute="trailing" id="I81-tJ-5zi"/>
+                            <constraint firstItem="jFQ-ZJ-BwD" firstAttribute="trailing" secondItem="Hcd-zL-z8G" secondAttribute="trailing" id="Iuo-dj-vYD"/>
+                            <constraint firstItem="Cis-1g-4gp" firstAttribute="leading" secondItem="Hcd-zL-z8G" secondAttribute="leading" id="SY9-nB-IQT"/>
+                            <constraint firstItem="RvL-Vh-odb" firstAttribute="leading" secondItem="Hcd-zL-z8G" secondAttribute="leading" id="d3k-su-ahM"/>
+                            <constraint firstItem="Cis-1g-4gp" firstAttribute="top" secondItem="RvL-Vh-odb" secondAttribute="bottom" id="dxD-RK-uF5"/>
+                            <constraint firstItem="RvL-Vh-odb" firstAttribute="top" secondItem="Hcd-zL-z8G" secondAttribute="top" id="qpy-Gs-EpQ"/>
+                            <constraint firstItem="jFQ-ZJ-BwD" firstAttribute="trailing" secondItem="Hcd-zL-z8G" secondAttribute="trailing" id="tHI-Jv-GIn"/>
+                            <constraint firstItem="jFQ-ZJ-BwD" firstAttribute="leading" secondItem="RvL-Vh-odb" secondAttribute="trailing" constant="24" id="uoQ-bZ-CHJ"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="x5T-6l-KJW">
@@ -211,11 +241,13 @@
                         <outlet property="addItemButton" destination="Cds-8G-eQj" id="Lac-OZ-5cb"/>
                         <outlet property="editAndSaveButton" destination="x2K-6y-9dd" id="7U5-Vy-pZe"/>
                         <outlet property="tableView" destination="Cis-1g-4gp" id="hVa-Gq-XLq"/>
+                        <outlet property="toggleCompletedButton" destination="jFQ-ZJ-BwD" id="6t0-YV-3L0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4g6-h6-dJd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="WaU-Ga-gs4" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1677" y="115"/>
+            <point key="canvasLocation" x="1675" y="115"/>
         </scene>
     </scenes>
     <resources>
